@@ -1,0 +1,106 @@
+
+<div>
+  <h1><u>COVID-19 TRACKER APP</u></h1>
+</div>
+
+<div class="mat-elevation-z8">
+  <mat-form-field>
+    <mat-label>Filter</mat-label>
+      <!--event.target.value added to pass string valu eto this method for filetr-->
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Ex. Ind">
+  </mat-form-field>
+
+  <table mat-table [dataSource]="dataSource" matSort matTableExporter #exporter="matTableExporter">
+<!-- <table mat-table [dataSource]="dataSource" class="mat-elevation-z8"> -->
+
+  <ng-container matColumnDef="country">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> COUNTRY </th>
+    <td mat-cell *matCellDef="let element"> {{element.country}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="cases">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> TOTAL CASES </th>
+    <td mat-cell *matCellDef="let element"> {{element.cases}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="todayCases">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> TODAY'S CASES </th>
+    <td mat-cell *matCellDef="let element"> {{element.todayCases}} </td>
+  </ng-container>
+
+   <ng-container matColumnDef="deaths">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> TOTAL DEATHS </th>
+    <td mat-cell *matCellDef="let element"> {{element.deaths}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="todayDeaths">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> TODAY'S DEATH </th>
+    <td mat-cell *matCellDef="let element"> {{element.todayDeaths}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="recovered">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> TOTAL RECOVERED </th>
+    <td mat-cell *matCellDef="let element"> {{element.recovered}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="active">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> ACTIVE CASES </th>
+    <td mat-cell *matCellDef="let element"> {{element.active}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="critical">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> CRITICAL CASES </th>
+    <td mat-cell *matCellDef="let element"> {{element.critical}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="casesPerOneMillion">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> CASES / 1MILLION </th>
+    <td mat-cell *matCellDef="let element"> {{element.casesPerOneMillion}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="deathsPerOneMillion">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> DEATH / 1MILLION </th>
+    <td mat-cell *matCellDef="let element"> {{element.deathsPerOneMillion}} </td>
+  </ng-container>
+
+   <ng-container matColumnDef="tests">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> TOTAL TESTS </th>
+    <td mat-cell *matCellDef="let element"> {{element.tests}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="testsPerOneMillion">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> TESTS/MILLION </th>
+    <td mat-cell *matCellDef="let element"> {{element.testsPerOneMillion}} </td>
+  </ng-container>
+
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+  <div class="paginator-row">
+   <mat-paginator #paginator [pageSizeOptions]="[5,8,10]" showFirstLastButtons></mat-paginator>
+  </div>
+  <div class="export-report">
+
+    &nbsp;&nbsp;&nbsp;
+    <button class="d-button" mat-raised-button color="accent"
+    (click)="exporter.exportTable('xlsx',{fileName:'DeadlyBeatcovid19'})">
+    <mat-icon>get_app</mat-icon>Export to Excel</button>
+
+    &nbsp;&nbsp;&nbsp;
+    <button class="d-button" mat-raised-button color="accent"
+    (click)="exporter.exportTable('csv',{fileName:'DeadlyBeatcovid19'})">
+    <mat-icon>get_app</mat-icon>Export to CSV</button>
+
+    &nbsp;&nbsp;&nbsp;
+    <button class="d-button" mat-raised-button color="accent"
+    (click)="exporter.exportTable('txt',{fileName:'DeadlyBeatcovid19'})">
+    <mat-icon>get_app</mat-icon>Export to Text</button>
+
+    &nbsp;&nbsp;&nbsp;
+    <button class="d-button" mat-raised-button color="accent"
+    (click)="exporter.exportTable('json',{fileName:'DeadlyBeatcovid19'})">
+    <mat-icon>get_app</mat-icon>Export to JSON</button>
+
+  </div>
+</div>
